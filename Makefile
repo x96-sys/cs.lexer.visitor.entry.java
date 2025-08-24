@@ -12,11 +12,11 @@ CS_KIND_VERSION = 0.1.3
 CS_KIND_JAR     = $(LIB_DIR)/org.x96.sys.foundation.cs.lexer.token.kind.jar
 CS_KIND_URL     = https://github.com/x96-sys/cs.lexer.token.kind.java/releases/download/0.1.3/org.x96.sys.foundation.cs.lexer.token.kind.jar
 
-CS_VISITOR_VERSION = 0.1.2
+CS_VISITOR_VERSION = 0.1.5
 CS_VISITOR_JAR = $(LIB_DIR)/org.x96.sys.foundation.cs.lexer.visitor.jar
 CS_VISITOR_URL = https://github.com/x96-sys/cs.lexer.visitor.java/releases/download/v$(CS_VISITOR_VERSION)/org.x96.sys.foundation.cs.lexer.visitor.jar
 
-CS_TOKENIZER_VERSION = 0.1.6
+CS_TOKENIZER_VERSION = 0.1.7
 CS_TOKENIZER_JAR     = $(LIB_DIR)/org.x96.sys.foundation.cs.lexer.tokenizer.jar
 CS_TOKENIZER_URL     = https://github.com/x96-sys/cs.lexer.tokenizer.java/releases/download/v$(CS_TOKENIZER_VERSION)/org.x96.sys.foundation.cs.lexer.tokenizer.jar
 
