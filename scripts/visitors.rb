@@ -44,8 +44,8 @@ FileUtils.mkdir_p(path) unless Dir.exist?(path)
 
 m = MakeJavaVisitor.new
 m.pkg = origin
-m.imports << "org.x96.sys.foundation.cs.lexer.tokenizer.Tokenizer"
-m.imports << "org.x96.sys.foundation.cs.lexer.visitor.Visitor"
+m.imports << "org.x96.sys.lexer.tokenizer.Tokenizer"
+m.imports << "org.x96.sys.lexer.visitor.Visitor"
 m.name = "Terminal"
 m.rule = "true"
 m.build
@@ -63,9 +63,9 @@ for i in kinds.length.times
     n = cml(k)
     m = MakeJavaVisitor.new
     m.pkg = pkg
-    m.imports << "org.x96.sys.foundation.cs.lexer.tokenizer.Tokenizer"
-    m.imports << "org.x96.sys.foundation.cs.lexer.visitor.Visitor"
-    m.imports << "org.x96.sys.foundation.cs.lexer.token.Kind"
+    m.imports << "org.x96.sys.lexer.tokenizer.Tokenizer"
+    m.imports << "org.x96.sys.lexer.visitor.Visitor"
+    m.imports << "org.x96.sys.lexer.token.Kind"
     m.name = n
     m.rule = "Kind.is#{n}(look())"
     m.build

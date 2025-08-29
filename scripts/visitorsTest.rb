@@ -55,10 +55,10 @@ for i in kinds.length.times
     n = cml(k)
     m = MakeJavaVisitorTest.new
     m.pkg = pkg
-    m.imports << "org.x96.sys.foundation.io.ByteStream"
-    m.imports << "org.x96.sys.foundation.cs.lexer.tokenizer.Tokenizer"
-    m.imports << "org.x96.sys.foundation.cs.lexer.visitor.Visitor"
-    m.imports << "org.x96.sys.foundation.cs.lexer.token.Kind"
+    m.imports << "org.x96.sys.io.ByteStream"
+    m.imports << "org.x96.sys.lexer.tokenizer.Tokenizer"
+    m.imports << "org.x96.sys.lexer.visitor.Visitor"
+    m.imports << "org.x96.sys.lexer.token.Kind"
     m.imports << "static org.junit.jupiter.api.Assertions.*"
     m.imports << "org.junit.jupiter.api.Test"
     m.name = n
