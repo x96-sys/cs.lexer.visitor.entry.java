@@ -1,6 +1,7 @@
-build
+out
 lib
-src/main/org/x96/sys/foundation/cs/lexer/visitor/entry/terminals/*
-src/test/org/x96/sys/foundation/cs/lexer/visitor/entry/terminals/*
+src/main/org/x96/sys/lexer/visitor/entry/terminals/*
+src/test/org/x96/sys/lexer/visitor/entry/terminals/*
 *.jar
 .idea
+*.iml

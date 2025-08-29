@@ -1,4 +1,4 @@
-BUILD_DIR     = build
+BUILD_DIR     = out
 MAIN_BUILD    = $(BUILD_DIR)/main
 TEST_BUILD    = $(BUILD_DIR)/test
 
@@ -23,10 +23,10 @@ KIND_JAR     = $(LIB_DIR)/org.x96.sys.lexer.token.kind.jar
 KIND_URL     = https://github.com/x96-sys/lexer.token.kind.java/releases/download/v$(KIND_VERSION)/org.x96.sys.lexer.token.kind.jar
 KIND_SHA256  = 55d12618cd548099d138cbc1e7beda2b78e6a09382ec725523e82f7eb5a31c69
 
-CS_VISITOR_VERSION = 0.1.7
-CS_VISITOR_JAR     = $(LIB_DIR)/org.x96.sys.lexer.visitor.jar
-CS_VISITOR_URL     = https://github.com/x96-sys/cs.lexer.visitor.java/releases/download/v$(CS_VISITOR_VERSION)/org.x96.sys.lexer.visitor.jar
-CS_VISITOR_SHA256  = 9fd6b80380e5b38139b2e8df2314d6c60e9038a8f9bdb1279acdd42b11ba24f0
+VISITOR_VERSION = 1.0.0
+VISITOR_JAR     = $(LIB_DIR)/org.x96.sys.lexer.visitor.jar
+VISITOR_URL     = https://github.com/x96-sys/lexer.visitor.java/releases/download/v$(VISITOR_VERSION)/org.x96.sys.lexer.visitor.jar
+VISITOR_SHA256  = 2ae4d8669d15c965e30053a7d92a362ea1136c3ef3c3bacdcb9dbbc347bc977e
 
 TOKENIZER_VERSION = 1.0.0
 TOKENIZER_JAR     = $(LIB_DIR)/org.x96.sys.lexer.tokenizer.jar
@@ -56,7 +56,7 @@ GJF_JAR     = $(TOOLS_DIR)/gjf.jar
 GJF_URL     = https://maven.org/maven2/com/google/googlejavaformat/google-java-format/$(GJF_VERSION)/google-java-format-$(GJF_VERSION)-all-deps.jar
 GJF_SHA256  = 32342e7c1b4600f80df3471da46aee8012d3e1445d5ea1be1fb71289b07cc735
 
-CP = $(CS_VISITOR_JAR):$(TOKENIZER_JAR):$(KIND_JAR)
+CP = $(VISITOR_JAR):$(TOKENIZER_JAR):$(KIND_JAR)
 
 JAVA_SOURCES      = $(shell find $(SRC_MAIN) -name "*.java")
 JAVA_TEST_SOURCES = $(shell find $(SRC_TEST) -name "*.java")
@@ -65,7 +65,13 @@ CPT = $(MAIN_BUILD):$(JUNIT_JAR):$(IO_JAR):$(CP):$(BUZZ_JAR)
 
 DISTRO_JAR = org.x96.sys.lexer.entry.jar
 
-build: clean/build/main libs
+gen: clean/gen
+	@echo "[♦️] [generating] visitor classes"
+	@ruby scripts/visitors.rb
+	@ruby scripts/visitorsTest.rb
+	@echo "[🧩] [generated] visitor classes"
+
+build: libs clean/build/main gen
 	@javac -d $(MAIN_BUILD) -cp $(CP) $(JAVA_SOURCES)
 	@echo "[🧩] [compiled] in [$(MAIN_BUILD)]"
 
@@ -96,7 +102,7 @@ coverage-report:
 
 coverage: coverage-run coverage-report
 	@echo "✅ Relatório de cobertura disponível em: build/coverage/index.html"
-	@echo "🌐 Abrir com: open build/coverage/index.html"
+	@echo "🌐 Abrir com: open out/coverage/index.html"
 
 define deps
 $1/$2: $1
@@ -138,7 +144,7 @@ libs: \
 
 $(eval $(call deps,$(LIB_DIR),io,IO))
 $(eval $(call deps,$(LIB_DIR),kind,KIND))
-$(eval $(call deps,$(LIB_DIR),visitor,CS_VISITOR))
+$(eval $(call deps,$(LIB_DIR),visitor,VISITOR))
 $(eval $(call deps,$(LIB_DIR),tokenizer,TOKENIZER))
 $(eval $(call deps,$(LIB_DIR),buzz,BUZZ))
 
@@ -163,10 +169,10 @@ clean/build/main:
 clean/build/test:
 	@rm -rf $(TEST_BUILD)
 
-clean/v:
-	@rm -rf src/main/org/x96/sys/foundation/cs/lexer/visitor/entry
+clean/gen:
+	@rm -rf src/main/org/x96/sys/lexer/visitor/entry
 
-clean:
+clean: clean/gen
 	@rm -rf $(BUILD_DIR)
 	@rm -rf $(LIB_DIR)
 	@rm -rf $(TOOLS_DIR)

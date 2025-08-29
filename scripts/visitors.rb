@@ -38,7 +38,7 @@ class MakeJavaVisitor
   end
 end
 
-origin = "org.x96.sys.foundation.cs.lexer.visitor.entry.terminals"
+origin = "org.x96.sys.lexer.visitor.entry.terminals"
 path = "./src/main/" + origin.gsub(".", "/")
 FileUtils.mkdir_p(path) unless Dir.exist?(path)
 
